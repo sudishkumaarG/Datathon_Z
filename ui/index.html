@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrustTrace | Seller Risk Analysis</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #090b10;
+  --panel: #121620;
+  --border: #292f3d;
+  --text: #eef2f8;
+  --muted: #9ca8ba;
+  --accent: #f4b942;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+}
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 22px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand { font-size: 23px; font-weight: 750; letter-spacing: -.5px; }
+.brand span { color: var(--accent); }
+.tag { color: var(--muted); font-size: 13px; }
+main { max-width: 950px; margin: 45px auto; padding: 0 20px; }
+h1 { font-size: clamp(30px, 5vw, 44px); margin-bottom: 10px; }
+.subtitle { color: var(--muted); line-height: 1.7; }
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 24px;
+  margin-top: 28px;
+}
+label { display: block; font-size: 14px; margin-bottom: 10px; }
+.controls { display: flex; gap: 10px; }
+input {
+  min-width: 0;
+  flex: 1;
+  background: #090b10;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 14px;
+  color: var(--text);
+  font-size: 15px;
+}
+button {
+  border: 0;
+  border-radius: 9px;
+  padding: 13px 22px;
+  background: var(--accent);
+  color: #15120a;
+  font-weight: 750;
+  cursor: pointer;
+}
+button:disabled { opacity: .6; cursor: wait; }
+.examples { margin-top: 17px; color: var(--muted); font-size: 13px; }
+.examples button {
+  background: #222938;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 7px 10px;
+  margin: 7px 5px 0 0;
+  font-size: 12px;
+}
+#status { margin-top: 16px; color: var(--muted); font-size: 14px; }
+.hidden { display: none !important; }
+.result-head {
+  display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+}
+.score {
+  width: 125px; height: 125px; border-radius: 50%;
+  border: 5px solid var(--border);
+  display: grid; place-content: center; text-align: center;
+}
+.score strong { font-size: 36px; line-height: 1.2; }
+.score small { color: var(--muted); }
+.risk-title { font-size: 25px; font-weight: 750; }
+.meta { color: var(--muted); margin-top: 7px; font-size: 14px; }
+.notice {
+  margin-top: 20px; padding: 12px 14px;
+  background: #252117; border: 1px solid #69532b;
+  border-radius: 9px; color: #f5d99b; font-size: 13px;
+}
+h2 { font-size: 19px; margin: 25px 0 12px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 12px; }
+.card { background: #0d1119; border: 1px solid var(--border); border-radius: 10px; padding: 15px; overflow-wrap: anywhere; }
+.card strong { display: block; margin-bottom: 8px; }
+.card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.report { white-space: pre-wrap; line-height: 1.8; font-size: 14px; }
+footer { color: var(--muted); text-align: center; padding: 25px; font-size: 12px; }
+@media(max-width:600px) {
+  .controls { flex-direction: column; }
+  .controls button { width: 100%; }
+  header { padding: 18px 20px; }
+  .tag { display: none; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Trust<span>Trace</span></div>
+  <div class="tag">Evidence before payment</div>
+</header>
+
+<main>
+  <h1>Check before you pay.</h1>
+  <p class="subtitle">
+    Examine seller and listing indicators before making a purchase.
+    A risk score is a warning tool, not proof of fraud.
+  </p>
+
+  <section class="panel">
+    <label for="link">Seller or product listing URL</label>
+    <div class="controls">
+      <input id="link" type="url"
+        placeholder="Paste a TrustTrace demo listing URL"
+        autocomplete="url">
+      <button id="analyze">Analyze listing</button>
+    </div>
+    <div class="examples">
+      Try a local synthetic demo:
+      <br>
+      <button data-id="012">High-indicator example</button>
+      <button data-id="001">Low-indicator example</button>
+      <button data-id="010">Missing evidence example</button>
+    </div>
+    <div id="status" role="status"></div>
+  </section>
+
+  <section id="results" class="panel hidden" aria-live="polite">
+    <div class="result-head">
+      <div class="score" id="scoreCircle">
+        <div><strong id="score">--</strong><br><small>/ 10</small></div>
+      </div>
+      <div>
+        <div class="risk-title" id="riskLevel">Assessment</div>
+        <div class="meta" id="confidence"></div>
+        <div class="meta" id="assessment"></div>
+      </div>
+    </div>
+
+    <div id="syntheticNotice" class="notice hidden">
+      Synthetic demo record — this is not a real seller assessment.
+    </div>
+
+    <h2>Risk indicators</h2>
+    <div id="reasons" class="cards"></div>
+
+    <h2>Evidence summary</h2>
+    <div id="evidence" class="cards"></div>
+
+    <h2>Report and next steps</h2>
+    <div id="report" class="report"></div>
+  </section>
+</main>
+
+<footer>
+  TrustTrace · IBM Z Datathon 2026 · Demo system, not a fraud determination
+</footer>
+
+<script>
+const input = document.getElementById("link");
+const button = document.getElementById("analyze");
+const statusBox = document.getElementById("status");
+const results = document.getElementById("results");
+
+document.querySelectorAll("[data-id]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    input.value =
+      "https://demo.trusttrace.test/product/" + btn.dataset.id;
+    analyze();
+  });
+});
+
+button.addEventListener("click", analyze);
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter") analyze();
+});
+
+function addCard(container, title, text) {
+  const card = document.createElement("div");
+  card.className = "card";
+  const heading = document.createElement("strong");
+  heading.textContent = title;
+  const body = document.createElement("p");
+  body.textContent = text;
+  card.append(heading, body);
+  container.appendChild(card);
+}
+
+function showEvidence(data) {
+  const target = document.getElementById("evidence");
+  target.replaceChildren();
+
+  const p = data.profile || {};
+  const im = data.image_match || {};
+  const pr = data.price || {};
+
+  addCard(target, "Seller profile",
+    "Account age: " + (p.account_age_days ?? "Unavailable") + " days\n" +
+    "Followers: " + (p.followers ?? "Unavailable") + "\n" +
+    "Public contact: " +
+    (p.has_contact_info === null || p.has_contact_info === undefined
+      ? "Unavailable" : p.has_contact_info ? "Found" : "Not found"));
+
+  addCard(target, "Image matches",
+    "Matching listings: " + (im.match_count ?? "Unavailable") + "\n" +
+    "Unique domains: " + (im.unique_domains ?? "Unavailable"));
+
+  addCard(target, "Price comparison",
+    "Listed price: " + (pr.listed_price ?? "Unavailable") + "\n" +
+    "Market median: " + (pr.market_median ?? "Unavailable") + "\n" +
+    "Comparable listings: " + (pr.comparable_count ?? "Unavailable"));
+
+  const sourceUrls = [
+    ...(p.sources || []), ...(im.sources || []), ...(pr.sources || [])
+  ];
+  if (sourceUrls.length) {
+    const linksCard = document.createElement("div");
+    linksCard.className = "card";
+    const heading = document.createElement("strong");
+    heading.textContent = "Evidence sources";
+    linksCard.appendChild(heading);
+    sourceUrls.forEach(url => {
+      try {
+        const parsed = new URL(url);
+        if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return;
+        const a = document.createElement("a");
+        a.href = parsed.href;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = parsed.href;
+        a.style.display = "block";
+        a.style.marginTop = "8px";
+        a.style.color = "#f4b942";
+        linksCard.appendChild(a);
+      } catch (_) {}
+    });
+    target.appendChild(linksCard);
+  }
+}
+
+async function analyze() {
+  const link = input.value.trim();
+  if (!link) {
+    statusBox.textContent = "Enter a listing URL or choose a demo example.";
+    return;
+  }
+
+  try {
+    const parsed = new URL(link);
+    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
+      throw new Error("Use an HTTP or HTTPS URL.");
+    }
+  } catch (e) {
+    statusBox.textContent = "Enter a valid HTTP or HTTPS URL.";
+    return;
+  }
+
+  button.disabled = true;
+  statusBox.textContent = "Analyzing listing...";
+  results.classList.add("hidden");
+
+  try {
+    const response = await fetch("/analyze", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({link})
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.detail || "Analysis failed.");
+    }
+
+    document.getElementById("score").textContent = data.score;
+    document.getElementById("riskLevel").textContent = data.risk_level;
+    document.getElementById("assessment").textContent = data.assessment;
+    document.getElementById("confidence").textContent =
+      "Confidence: " + data.confidence;
+
+    const circle = document.getElementById("scoreCircle");
+    circle.style.borderColor =
+      data.risk_level === "High" ? "#ff6969" :
+      data.risk_level === "Medium" ? "#f4b942" :
+      data.risk_level === "Low" ? "#53c995" : "#8993a4";
+
+    document.getElementById("syntheticNotice")
+      .classList.toggle("hidden", !data.evidence?.synthetic);
+
+    const reasonTarget = document.getElementById("reasons");
+    reasonTarget.replaceChildren();
+    if (data.top_reasons?.length) {
+      data.top_reasons.forEach(reason =>
+        addCard(reasonTarget,
+          reason.signal + " · +" + reason.points + " points",
+          reason.text));
+    } else {
+      addCard(reasonTarget, "No established indicators",
+        "The available evidence did not establish a risk indicator.");
+    }
+
+    showEvidence(data.evidence || {});
+    document.getElementById("report").textContent = data.report || "";
+    results.classList.remove("hidden");
+    statusBox.textContent = "Analysis complete.";
+  } catch (error) {
+    statusBox.textContent = error.message;
+  } finally {
+    button.disabled = false;
+  }
+}
+</script>
+</body>
+</html>

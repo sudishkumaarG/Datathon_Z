@@ -1,0 +1,302 @@
+[
+  {
+    "seller_id": "DEMO001",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/001",
+    "product_name": "Wireless Headphones",
+    "profile": {
+      "account_age_days": 900,
+      "followers": 2400,
+      "following": 300,
+      "posts": 180,
+      "engagement_ratio": 0.035,
+      "has_contact_info": true
+    },
+    "image_match": {
+      "match_count": 1,
+      "unique_domains": 1,
+      "sources": []
+    },
+    "price": {
+      "listed_price": 2999.0,
+      "market_median": 3200.0,
+      "comparable_count": 5,
+      "sources": []
+    }
+  },
+  {
+    "seller_id": "DEMO002",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/002",
+    "product_name": "Smart Watch",
+    "profile": {
+      "account_age_days": 600,
+      "followers": 1800,
+      "following": 450,
+      "posts": 120,
+      "engagement_ratio": 0.025,
+      "has_contact_info": true
+    },
+    "image_match": {
+      "match_count": 2,
+      "unique_domains": 2,
+      "sources": []
+    },
+    "price": {
+      "listed_price": 2499.0,
+      "market_median": 2800.0,
+      "comparable_count": 4,
+      "sources": []
+    }
+  },
+  {
+    "seller_id": "DEMO003",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/003",
+    "product_name": "Bluetooth Speaker",
+    "profile": {
+      "account_age_days": 1200,
+      "followers": 3500,
+      "following": 500,
+      "posts": 250,
+      "engagement_ratio": 0.04,
+      "has_contact_info": true
+    },
+    "image_match": {
+      "match_count": 1,
+      "unique_domains": 1,
+      "sources": []
+    },
+    "price": {
+      "listed_price": 1599.0,
+      "market_median": 1800.0,
+      "comparable_count": 6,
+      "sources": []
+    }
+  },
+  {
+    "seller_id": "DEMO004",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/004",
+    "product_name": "Gaming Mouse",
+    "profile": {
+      "account_age_days": 420,
+      "followers": 900,
+      "following": 350,
+      "posts": 90,
+      "engagement_ratio": 0.02,
+      "has_contact_info": true
+    },
+    "image_match": {
+      "match_count": 3,
+      "unique_domains": 2,
+      "sources": []
+    },
+    "price": {
+      "listed_price": 1199.0,
+      "market_median": 1400.0,
+      "comparable_count": 4,
+      "sources": []
+    }
+  },
+  {
+    "seller_id": "DEMO005",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/005",
+    "product_name": "Wireless Earbuds",
+    "profile": {
+      "account_age_days": 14,
+      "followers": 120,
+      "following": 700,
+      "posts": 5,
+      "engagement_ratio": 0.01,
+      "has_contact_info": false
+    },
+    "image_match": {
+      "match_count": 12,
+      "unique_domains": 8,
+      "sources": []
+    },
+    "price": {
+      "listed_price": 499.0,
+      "market_median": 2499.0,
+      "comparable_count": 8,
+      "sources": []
+    }
+  },
+  {
+    "seller_id": "DEMO006",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/006",
+    "product_name": "Premium Headphones",
+    "profile": {
+      "account_age_days": 20,
+      "followers": 80,
+      "following": 650,
+      "posts": 4,
+      "engagement_ratio": 0.008,
+      "has_contact_info": false
+    },
+    "image_match": {
+      "match_count": 15,
+      "unique_domains": 10,
+      "sources": []
+    },
+    "price": {
+      "listed_price": 799.0,
+      "market_median": 3999.0,
+      "comparable_count": 9,
+      "sources": []
+    }
+  },
+  {
+    "seller_id": "DEMO007",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/007",
+    "product_name": "Fitness Band",
+    "profile": {
+      "account_age_days": 45,
+      "followers": 1500,
+      "following": 800,
+      "posts": 20,
+      "engagement_ratio": 0.002,
+      "has_contact_info": true
+    },
+    "image_match": {
+      "match_count": 4,
+      "unique_domains": 3,
+      "sources": []
+    },
+    "price": {
+      "listed_price": 899.0,
+      "market_median": 2200.0,
+      "comparable_count": 7,
+      "sources": []
+    }
+  },
+  {
+    "seller_id": "DEMO008",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/008",
+    "product_name": "Mechanical Keyboard",
+    "profile": {
+      "account_age_days": 10,
+      "followers": 60,
+      "following": 500,
+      "posts": 3,
+      "engagement_ratio": 0.01,
+      "has_contact_info": false
+    },
+    "image_match": {
+      "match_count": 2,
+      "unique_domains": 2,
+      "sources": []
+    },
+    "price": {
+      "listed_price": 3499.0,
+      "market_median": 4000.0,
+      "comparable_count": 5,
+      "sources": []
+    }
+  },
+  {
+    "seller_id": "DEMO009",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/009",
+    "product_name": "Portable SSD",
+    "profile": {
+      "account_age_days": 700,
+      "followers": 2200,
+      "following": 400,
+      "posts": 140,
+      "engagement_ratio": 0.03,
+      "has_contact_info": true
+    },
+    "image_match": {
+      "match_count": 11,
+      "unique_domains": 7,
+      "sources": []
+    },
+    "price": {
+      "listed_price": 4999.0,
+      "market_median": 6500.0,
+      "comparable_count": 6,
+      "sources": []
+    }
+  },
+  {
+    "seller_id": "DEMO010",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/010",
+    "product_name": "Action Camera",
+    "profile": {
+      "account_age_days": null,
+      "followers": null,
+      "following": null,
+      "posts": null,
+      "engagement_ratio": null,
+      "has_contact_info": null
+    },
+    "image_match": {
+      "match_count": null,
+      "unique_domains": null,
+      "sources": []
+    },
+    "price": {
+      "listed_price": null,
+      "market_median": null,
+      "comparable_count": null,
+      "sources": []
+    }
+  },
+  {
+    "seller_id": "DEMO011",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/011",
+    "product_name": "Tablet",
+    "profile": {
+      "account_age_days": 365,
+      "followers": 5000,
+      "following": 1000,
+      "posts": 200,
+      "engagement_ratio": 0.025,
+      "has_contact_info": true
+    },
+    "image_match": {
+      "match_count": 2,
+      "unique_domains": 2,
+      "sources": []
+    },
+    "price": {
+      "listed_price": 8999.0,
+      "market_median": 10000.0,
+      "comparable_count": 10,
+      "sources": []
+    }
+  },
+  {
+    "seller_id": "DEMO012",
+    "synthetic": true,
+    "listing_url": "https://demo.trusttrace.test/product/012",
+    "product_name": "Wireless Earbuds",
+    "profile": {
+      "account_age_days": 8,
+      "followers": 50,
+      "following": 900,
+      "posts": 2,
+      "engagement_ratio": 0.005,
+      "has_contact_info": false
+    },
+    "image_match": {
+      "match_count": 18,
+      "unique_domains": 12,
+      "sources": []
+    },
+    "price": {
+      "listed_price": 299.0,
+      "market_median": 2999.0,
+      "comparable_count": 12,
+      "sources": []
+    }
+  }
+]
